@@ -16,15 +16,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setBar(barEl, percent) {
     const clamped = Math.max(0, Math.min(100, Math.round(percent)));
+    // Mantener la barra (aunque no visible) para accesibilidad
     barEl.style.width = clamped + '%';
     barEl.classList.remove('bar-ok', 'bar-warn', 'bar-bad');
-    if (clamped >= 70) barEl.classList.add('bar-ok');
-    else if (clamped >= 40) barEl.classList.add('bar-warn');
-    else barEl.classList.add('bar-bad');
-    // Update aria-valuenow on parent progressbar
+    let statusClass = 'bar-bad';
+    if (clamped >= 70) statusClass = 'bar-ok';
+    else if (clamped >= 40) statusClass = 'bar-warn';
+    barEl.classList.add(statusClass);
+    // Actualizar aria-valuenow en el contenedor
     const parent = barEl.parentElement;
     if (parent && parent.getAttribute('role') === 'progressbar') {
       parent.setAttribute('aria-valuenow', String(clamped));
+    }
+    // Reflejar estado en el contenedor del ítem (ok/warn/bad) para UI minimalista
+    const item = barEl.closest('.health-item');
+    if (item) {
+      item.classList.remove('ok', 'warn', 'bad');
+      if (statusClass === 'bar-ok') item.classList.add('ok');
+      else if (statusClass === 'bar-warn') item.classList.add('warn');
+      else item.classList.add('bad');
     }
   }
 

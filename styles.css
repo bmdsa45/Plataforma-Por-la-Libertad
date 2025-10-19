@@ -959,61 +959,82 @@ footer {
   background: rgba(0, 0, 0, 0.04);
 }
 
-/* Salud y seguridad del sitio */
+/* Salud y seguridad del sitio (minimal) */
 .site-health {
   background: var(--secondary-color);
-  padding: 60px 0;
+  padding: 28px 0;
 }
 .site-health h2 {
   color: var(--primary-color);
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  font-size: 1.5rem;
 }
 .site-health p {
   text-align: center;
-  color: #666;
-  margin-bottom: 24px;
+  color: #888;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
 }
 .health-bars {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
   max-width: 800px;
   margin: 0 auto;
+}
+.health-item {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: transparent;
 }
 .health-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+}
+.health-header span:first-child {
+  position: relative;
+  padding-left: 14px;
+}
+.health-header span:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #bbb;
+}
+.health-item.ok .health-header span:first-child::before { background: #28a745; }
+.health-item.warn .health-header span:first-child::before { background: #ffc107; }
+.health-item.bad .health-header span:first-child::before { background: #dc3545; }
+.health-value {
+  color: #444;
+  font-variant-numeric: tabular-nums;
   font-weight: 500;
 }
-.health-value {
-  color: #555;
-  font-variant-numeric: tabular-nums;
-}
-.health-bar {
-  height: 12px;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.health-bar-fill {
-  height: 100%;
-  width: 0%;
-  transition: width 0.4s ease;
-}
+.health-item.ok .health-value { color: #1f7a33; }
+.health-item.warn .health-value { color: #8a6d1d; }
+.health-item.bad .health-value { color: #8a1f1f; }
+.health-bar { display: none; }
+.health-bar-fill { height: 100%; width: 0%; transition: width 0.4s ease; }
 .bar-ok { background: #28a745; }
 .bar-warn { background: #ffc107; }
 .bar-bad { background: #dc3545; }
 .health-meta {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 8px;
   color: #666;
   flex-wrap: wrap;
+  font-size: 0.9rem;
 }
-
 @media (max-width: 576px) {
-  .site-health { padding: 40px 0; }
+  .site-health { padding: 20px 0; }
+  .health-bars { grid-template-columns: 1fr; }
 }
