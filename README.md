@@ -48,3 +48,9 @@ Sitio web informativo del movimiento PPLuy. Incluye secciones públicas, formula
 
 ## Notas de seguridad
 - Para cabeceras como CSP/HSTS/nosniff/Referrer-Policy, en GitHub Pages la gestión de cabeceras la hace la plataforma. Las etiquetas `meta` ayudan en algunos casos, pero las cabeceras HTTP ofrecen mayor eficacia.
+
+## Redes sociales
+- X: https://x.com/PPLuy_
+- Ubicación: footer de todas las páginas y sección social-media de `registro.html`.
+- Icono: Font Awesome `fa-x-twitter` ya incluido en los HTML. Color configurado en `styles.css`.
+- Para añadir otras redes: editar los bloques `.social-links` en los HTML y el estilo correspondiente en `styles.css`.
