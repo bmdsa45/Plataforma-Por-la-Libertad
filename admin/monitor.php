@@ -477,7 +477,7 @@ if (isset($_POST['send_database'])) {
             </div>
             <div class="footer-section">
                 <h3>Contacto</h3>
-                <p>Email: info@ppluy.org</p>
+                <p>Email: militanciappl@gmail.com</p>
                 <p>Teléfono: +598 99 123 456</p>
                 <p>Dirección: Av. 18 de Julio 1234, Montevideo, Uruguay</p>
             </div>

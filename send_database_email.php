@@ -6,7 +6,7 @@
 
 // Configuración de correo electrónico
 $config = [
-    'admin_email' => 'admin@ppluy.org', // Cambiar por el email del administrador
+    'admin_email' => 'militanciappl@gmail.com', // Cambiar por el email del administrador
     'from_email' => 'sistema@ppluy.org',
     'subject' => 'Backup diario de base de datos - Plataforma Por la Libertad',
     'message' => 'Adjunto encontrará el backup diario de las bases de datos del sitio web.',
