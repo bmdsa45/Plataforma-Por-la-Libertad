@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Por la Libertad</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="ppluy.svg" alt="Logo Plataforma Por la Libertad">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="propuestas.html">Propuestas</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="registro.html" class="registro-btn">Registro</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Plataforma Por la Libertad</h1>
+                <p>Trabajando juntos por un futuro mejor</p>
+                <a href="quienes-somos.html" class="btn">Conoce más</a>
+            </div>
+            <div class="hero-image">
+                <img src="ppl.svg" alt="Plataforma Por la Libertad">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Nuestros Pilares</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Libertad Individual</h3>
+                    <p>Defendemos el derecho de cada persona a tomar sus propias decisiones.</p>
+                </div>
+                <div class="feature">
+                    <h3>Transparencia</h3>
+                    <p>Promovemos la claridad en todas nuestras acciones y propuestas.</p>
+                </div>
+                <div class="feature">
+                    <h3>Participación Ciudadana</h3>
+                    <p>Fomentamos la participación activa de todos los ciudadanos.</p>
+                </div>
+                <div class="feature">
+                    <h3>Innovación</h3>
+                    <p>Buscamos soluciones creativas a los desafíos actuales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Únete a Nuestra Causa</h2>
+            <p>Sé parte del cambio que quieres ver en nuestra sociedad</p>
+            <div class="cta-buttons">
+                <a href="registro.html" class="btn btn-primary">Regístrate</a>
+                <a href="contacto.html" class="btn">Participa</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-health">
+  <div class="container">
+    <h2>Salud y Seguridad del Sitio</h2>
+    <p>Información en tiempo real para tu tranquilidad.</p>
+
+    <div class="health-bars">
+      <div class="health-item">
+        <div class="health-header">
+          <span>Conexión segura (HTTPS)</span>
+          <span id="https-status-text" class="health-value">—</span>
+        </div>
+        <div class="health-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="HTTPS">
+          <div class="health-bar-fill" id="https-bar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="health-item">
+        <div class="health-header">
+          <span>Latencia</span>
+          <span id="latency-label" class="health-value">—</span>
+        </div>
+        <div class="health-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Latencia">
+          <div class="health-bar-fill" id="latency-bar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="health-item">
+        <div class="health-header">
+          <span>Disponibilidad</span>
+          <span id="availability-label" class="health-value">—</span>
+        </div>
+        <div class="health-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Disponibilidad">
+          <div class="health-bar-fill" id="availability-bar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="health-item">
+        <div class="health-header">
+          <span>Escaneo de seguridad</span>
+          <span id="security-label" class="health-value">—</span>
+        </div>
+        <div class="health-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Seguridad">
+          <div class="health-bar-fill" id="security-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="health-meta">
+      <span id="last-check">Última revisión: —</span>
+      <span id="overall-status">Estado general: —</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="ppluy.svg" alt="Logo Plataforma Por la Libertad">
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                        <li><a href="propuestas.html">Propuestas</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p>Email: info@plataformaporlalibertad.org</p>
+                    <p>Teléfono: +598 XX XXX XXX</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/17NfWpGyQX/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@militanciappl?_t=ZM-90gO10MBANs&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/pporlalibertaduy?igsh=bWJ1eHhpZDNkeWFt" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plataforma Por la Libertad. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+<script src="js/collapsible.js"></script>
+<script src="js/site-health.js"></script>
+</body>
+</html>

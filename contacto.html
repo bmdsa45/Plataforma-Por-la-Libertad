@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Plataforma Por la Libertad</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="js/form-validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="ppluy.svg" alt="Logo Plataforma Por la Libertad">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="propuestas.html">Propuestas</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="contacto.html" class="active">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Contacto</h1>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Información de Contacto</h2>
+                    <p>Estamos aquí para escucharte. Puedes contactarnos a través de los siguientes medios o utilizando el formulario de contacto.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <h3>Dirección</h3>
+                            <p>Av. Principal 1234, Montevideo, Uruguay</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>Teléfono</h3>
+                            <p>+598 XX XXX XXX</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>Email</h3>
+                            <p>info@plataformaporlalibertad.org</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>Horario de Atención</h3>
+                            <p>Lunes a Viernes: 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-contact">
+                        <h3>Síguenos en Redes Sociales</h3>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/17NfWpGyQX/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i> Facebook</a>
+                            <a href="https://www.tiktok.com/@militanciappl?_t=ZM-90gO10MBANs&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i> TikTok</a>
+                            <a href="https://www.instagram.com/pporlalibertaduy?igsh=bWJ1eHhpZDNkeWFt" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i> Instagram</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Envíanos un Mensaje</h2>
+                    <div id="form-success" class="form-success" style="display: none;">
+                        <p>¡Gracias por tu mensaje! Te responderemos a la brevedad.</p>
+                    </div>
+                    <div id="form-error" class="form-error" style="display: none;">
+                        <p>Ha ocurrido un error. Por favor, intenta nuevamente.</p>
+                    </div>
+                    <form id="contactForm" action="process_form.php" method="post">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required minlength="2" maxlength="100" pattern="[A-Za-záéíóúüñÁÉÍÓÚÜÑ\s]+" title="Por favor ingresa un nombre válido (solo letras y espacios)">
+                            <span class="error-message" id="name-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Por favor ingresa un correo electrónico válido">
+                            <span class="error-message" id="email-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" name="subject" required minlength="3" maxlength="100">
+                            <span class="error-message" id="subject-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required minlength="10" maxlength="1000"></textarea>
+                            <span class="error-message" id="message-error"></span>
+                        </div>
+                        
+                        <!-- Token CSRF oculto -->
+                        <input type="hidden" name="csrf_token" id="csrf_token" value="">
+                        
+                        <!-- Captcha simple -->
+                        <div class="form-group captcha-container">
+                            <label for="captcha">Verificación de seguridad: ¿Cuánto es <span id="captcha-question"></span>?</label>
+                            <input type="number" id="captcha" name="captcha" required>
+                            <span class="error-message" id="captcha-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn" id="submit-btn">Enviar Mensaje</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-section">
+                <h2>Nuestra Ubicación</h2>
+                <div class="map-container">
+                    <!-- Aquí iría un mapa interactivo, pero por simplicidad usamos un placeholder -->
+                    <div class="map-placeholder">
+                        <p>Mapa de ubicación</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Preguntas Frecuentes</h2>
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <h3>¿Cómo puedo unirme a la Plataforma Por la Libertad?</h3>
+                        <p>Puedes unirte completando el formulario de contacto o enviándonos un correo electrónico. Te responderemos con información sobre los próximos pasos.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Organizan eventos abiertos al público?</h3>
+                        <p>Sí, regularmente organizamos conferencias, debates y talleres abiertos al público. Puedes consultar nuestra sección de Noticias para conocer los próximos eventos.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Cómo puedo contribuir con la causa?</h3>
+                        <p>Existen múltiples formas de contribuir: participando en eventos, compartiendo nuestras propuestas, ofreciéndote como voluntario o realizando donaciones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="ppluy.svg" alt="Logo Plataforma Por la Libertad">
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                        <li><a href="propuestas.html">Propuestas</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p>Email: info@plataformaporlalibertad.org</p>
+                    <p>Teléfono: +598 XX XXX XXX</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/17NfWpGyQX/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@militanciappl?_t=ZM-90gO10MBANs&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/pporlalibertaduy?igsh=bWJ1eHhpZDNkeWFt" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plataforma Por la Libertad. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+<script src="js/collapsible.js"></script>
+</body>
+</html>

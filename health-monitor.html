@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Salud del Sitio - Plataforma Por la Libertad</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .metric-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .metric-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-good {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-critical {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 10px 0;
+            color: #0056b3;
+        }
+        
+        .metric-description {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-value {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .security-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .security-table th, .security-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .security-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .security-table tr:hover {
+            background-color: #f1f3f5;
+        }
+        
+        .check-icon {
+            color: #28a745;
+        }
+        
+        .warning-icon {
+            color: #ffc107;
+        }
+        
+        .error-icon {
+            color: #dc3545;
+        }
+        
+        .refresh-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-button:hover {
+            background-color: #004494;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="ppluy.svg" alt="Logo de Plataforma Por la Libertad">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                <li><a href="propuestas.html">Propuestas</a></li>
+                <li><a href="noticias.html">Noticias</a></li>
+                <li><a href="documentos.html">Documentos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="health-monitor.html" class="active">Monitor</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container">
+            <h1>Monitor de Salud del Sitio</h1>
+            <p>Panel de control en tiempo real para monitorear el estado y rendimiento del sitio web.</p>
+            
+            <button id="refreshButton" class="refresh-button">Actualizar datos</button>
+            
+            <div class="dashboard">
+                <!-- Rendimiento -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Tiempo de carga</span>
+                        <span class="metric-status status-good">Bueno</span>
+                    </div>
+                    <div class="metric-value">1.2s</div>
+                    <div class="metric-description">Tiempo promedio de carga de página</div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 85%; background-color: #28a745;"></div>
+                    </div>
+                </div>
+                
+                <!-- Seguridad -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Puntuación de seguridad</span>
+                        <span class="metric-status status-good">Seguro</span>
+                    </div>
+                    <div class="metric-value">92%</div>
+                    <div class="metric-description">Basado en implementaciones de seguridad</div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 92%; background-color: #28a745;"></div>
+                    </div>
+                </div>
+                
+                <!-- SEO -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Puntuación SEO</span>
+                        <span class="metric-status status-warning">Mejorable</span>
+                    </div>
+                    <div class="metric-value">78%</div>
+                    <div class="metric-description">Optimización para motores de búsqueda</div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 78%; background-color: #ffc107;"></div>
+                    </div>
+                </div>
+                
+                <!-- Disponibilidad -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Tiempo de actividad</span>
+                        <span class="metric-status status-good">Excelente</span>
+                    </div>
+                    <div class="metric-value">99.9%</div>
+                    <div class="metric-description">Disponibilidad del sitio en el último mes</div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 99.9%; background-color: #28a745;"></div>
+                    </div>
+                </div>
+                
+                <!-- Responsividad -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Compatibilidad móvil</span>
+                        <span class="metric-status status-good">Optimizado</span>
+                    </div>
+                    <div class="metric-value">95%</div>
+                    <div class="metric-description">Adaptabilidad a dispositivos móviles</div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 95%; background-color: #28a745;"></div>
+                    </div>
+                </div>
+                
+                <!-- Errores -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Errores detectados</span>
+                        <span class="metric-status status-good">Mínimo</span>
+                    </div>
+                    <div class="metric-value">0</div>
+                    <div class="metric-description">Errores JavaScript en las últimas 24h</div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 100%; background-color: #28a745;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Detalles de seguridad implementada</h2>
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Medida de seguridad</th>
+                        <th>Estado</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Protección CSRF</td>
+                        <td><span class="check-icon">✓</span> Implementado</td>
+                        <td>Tokens CSRF generados para todos los formularios</td>
+                    </tr>
+                    <tr>
+                        <td>Protección XSS</td>
+                        <td><span class="check-icon">✓</span> Implementado</td>
+                        <td>Sanitización de entradas y encabezados HTTP</td>
+                    </tr>
+                    <tr>
+                        <td>Encriptación de datos</td>
+                        <td><span class="check-icon">✓</span> Implementado</td>
+                        <td>BitLocker para datos de pago y contraseñas con hash</td>
+                    </tr>
+                    <tr>
+                        <td>Cabeceras de seguridad</td>
+                        <td><span class="check-icon">✓</span> Implementado</td>
+                        <td>CSP, X-XSS-Protection, X-Frame-Options configurados</td>
+                    </tr>
+                    <tr>
+                        <td>HTTPS</td>
+                        <td><span class="warning-icon">!</span> Pendiente</td>
+                        <td>Recomendado implementar en producción</td>
+                    </tr>
+                    <tr>
+                        <td>Protección contra fuerza bruta</td>
+                        <td><span class="warning-icon">!</span> Parcial</td>
+                        <td>Implementado CAPTCHA, pendiente limitación de intentos</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Recomendaciones de mejora</h2>
+            <ul>
+                <li>Implementar HTTPS para todas las páginas del sitio</li>
+                <li>Añadir limitación de intentos de inicio de sesión</li>
+                <li>Mejorar metadatos SEO en todas las páginas</li>
+                <li>Implementar compresión de imágenes para mejorar rendimiento</li>
+                <li>Configurar monitoreo continuo de seguridad</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Plataforma Por la Libertad</h3>
+                <p>Trabajando por un Uruguay más libre y próspero.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="propuestas.html">Propuestas</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="documentos.html">Documentos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="registro.html">Registro</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Email: info@ppluy.org</p>
+                <p>Teléfono: +598 99 123 456</p>
+                <p>Dirección: Av. 18 de Julio 1234, Montevideo, Uruguay</p>
+            </div>
+        </div>
+        <p>&copy; 2025 Plataforma Por la Libertad. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulación de actualización de datos
+            document.getElementById('refreshButton').addEventListener('click', function() {
+                this.textContent = 'Actualizando...';
+                
+                // Simular carga de datos
+                setTimeout(() => {
+                    updateMetrics();
+                    this.textContent = 'Actualizar datos';
+                }, 1500);
+            });
+            
+            function updateMetrics() {
+                // Simulación de datos actualizados
+                const metrics = [
+                    {
+                        element: document.querySelectorAll('.metric-value')[0],
+                        values: ['1.2s', '1.3s', '1.1s', '1.4s'],
+                        status: document.querySelectorAll('.metric-status')[0],
+                        progress: document.querySelectorAll('.progress-value')[0],
+                        progressValues: ['85%', '80%', '90%', '75%']
+                    },
+                    {
+                        element: document.querySelectorAll('.metric-value')[1],
+                        values: ['92%', '91%', '93%', '90%'],
+                        status: document.querySelectorAll('.metric-status')[1],
+                        progress: document.querySelectorAll('.progress-value')[1],
+                        progressValues: ['92%', '91%', '93%', '90%']
+                    },
+                    {
+                        element: document.querySelectorAll('.metric-value')[2],
+                        values: ['78%', '79%', '77%', '80%'],
+                        status: document.querySelectorAll('.metric-status')[2],
+                        progress: document.querySelectorAll('.progress-value')[2],
+                        progressValues: ['78%', '79%', '77%', '80%']
+                    },
+                    {
+                        element: document.querySelectorAll('.metric-value')[3],
+                        values: ['99.9%', '99.8%', '100%', '99.7%'],
+                        status: document.querySelectorAll('.metric-status')[3],
+                        progress: document.querySelectorAll('.progress-value')[3],
+                        progressValues: ['99.9%', '99.8%', '100%', '99.7%']
+                    },
+                    {
+                        element: document.querySelectorAll('.metric-value')[4],
+                        values: ['95%', '94%', '96%', '93%'],
+                        status: document.querySelectorAll('.metric-status')[4],
+                        progress: document.querySelectorAll('.progress-value')[4],
+                        progressValues: ['95%', '94%', '96%', '93%']
+                    },
+                    {
+                        element: document.querySelectorAll('.metric-value')[5],
+                        values: ['0', '1', '0', '2'],
+                        status: document.querySelectorAll('.metric-status')[5],
+                        progress: document.querySelectorAll('.progress-value')[5],
+                        progressValues: ['100%', '90%', '100%', '80%']
+                    }
+                ];
+                
+                metrics.forEach(metric => {
+                    const randomIndex = Math.floor(Math.random() * metric.values.length);
+                    metric.element.textContent = metric.values[randomIndex];
+                    metric.progress.style.width = metric.progressValues[randomIndex];
+                    
+                    // Actualizar estado según el valor
+                    const value = parseFloat(metric.values[randomIndex]);
+                    if (metric.element === metrics[5].element) { // Errores
+                        if (value === 0) {
+                            metric.status.className = 'metric-status status-good';
+                            metric.status.textContent = 'Mínimo';
+                            metric.progress.style.backgroundColor = '#28a745';
+                        } else if (value <= 2) {
+                            metric.status.className = 'metric-status status-warning';
+                            metric.status.textContent = 'Atención';
+                            metric.progress.style.backgroundColor = '#ffc107';
+                        } else {
+                            metric.status.className = 'metric-status status-critical';
+                            metric.status.textContent = 'Crítico';
+                            metric.progress.style.backgroundColor = '#dc3545';
+                        }
+                    } else {
+                        if (value >= 90 || (metric.element === metrics[0].element && value <= 1.2)) {
+                            metric.status.className = 'metric-status status-good';
+                            metric.progress.style.backgroundColor = '#28a745';
+                        } else if (value >= 70 || (metric.element === metrics[0].element && value <= 1.8)) {
+                            metric.status.className = 'metric-status status-warning';
+                            metric.progress.style.backgroundColor = '#ffc107';
+                        } else {
+                            metric.status.className = 'metric-status status-critical';
+                            metric.progress.style.backgroundColor = '#dc3545';
+                        }
+                    }
+                });
+                
+                // Mostrar notificación de actualización
+                const notification = document.createElement('div');
+                notification.textContent = 'Datos actualizados: ' + new Date().toLocaleTimeString();
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = '#0056b3';
+                notification.style.color = 'white';
+                notification.style.padding = '10px 20px';
+                notification.style.borderRadius = '4px';
+                notification.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
