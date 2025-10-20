@@ -1,17 +1,56 @@
 # Plataforma Por la Libertad (PPLuy)
 
-Sitio web informativo del movimiento PPLuy. Incluye secciones públicas, formulario de contacto/registro y mejoras de usabilidad móvil (bloques plegables). Se añadió una sección de **Salud y Seguridad del Sitio** en la portada con indicadores claros y actualización automática.
+Sitio web completo del movimiento PPLuy con funcionalidades públicas y panel de administración. Incluye secciones informativas, formularios de contacto/registro, sistema de administración y monitoreo de salud del sitio.
 
-## Estructura rápida
-- `index.html`: Portada (con sección de salud).
-- `styles.css`: Estilos globales.
-- `js/collapsible.js`: Bloques plegables en móvil (redes/footer/FAQs).
-- `js/site-health.js`: Indicadores de salud en tiempo real.
-- `contacto.html`, `registro.html`, `documentos.html`, `noticias.html`, `propuestas.html`, `quienes-somos.html`: Páginas del sitio.
+## Características principales
+- **Sitio web público** con páginas informativas
+- **Panel de administración** con autenticación
+- **Sistema de contacto** con base de datos SQLite
+- **Registro de usuarios** y gestión de donantes
+- **Monitoreo de salud** del sitio en tiempo real
+- **Diseño responsive** con bloques plegables móviles
+- **Backup automático** de bases de datos por email
+
+## Estructura del proyecto
+```
+PPLuy/
+├── index.html                 # Portada principal
+├── styles.css                 # Estilos globales
+├── admin/                     # Panel de administración
+│   ├── login.php             # Login de administrador
+│   └── monitor.php           # Dashboard de administración
+├── database/                  # Bases de datos SQLite
+│   ├── contact_form.db       # Mensajes de contacto
+│   ├── user_registry.db      # Registro de usuarios
+│   └── create_user_registry.php
+├── js/                       # Scripts JavaScript
+│   ├── collapsible.js        # Bloques plegables móviles
+│   ├── site-health.js        # Monitoreo de salud
+│   ├── form-validation.js    # Validación de formularios
+│   └── registro-validation.js
+├── process_form.php          # Procesamiento de contacto
+├── process_registro.php      # Procesamiento de registro
+├── send_database_email.php   # Backup por email
+└── [páginas públicas].html   # Contenido informativo
+```
 
 ## Desarrollo local
-1. En la carpeta del proyecto, ejecutar: `python -m http.server 8000`
-2. Abrir: `http://localhost:8000/index.html`
+
+### Servidor estático (para contenido HTML/CSS/JS)
+```bash
+python -m http.server 8000
+```
+Acceder a: `http://localhost:8000/`
+
+### Servidor PHP (para funcionalidades backend)
+```bash
+php -S localhost:8080
+```
+Acceder a: `http://localhost:8080/`
+
+**Panel de administración**: `http://localhost:8080/admin/login.php`
+- Usuario: `admin@ppluy.org`
+- Contraseña: `admin123`
 
 ## Salud y Seguridad del Sitio
 - Ubicación: portada (`index.html`). Lógica en `js/site-health.js`. Estilos en `styles.css`.

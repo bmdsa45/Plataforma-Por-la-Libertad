@@ -1,0 +1,59 @@
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.swo
+*~
+
+# Archivos de configuración local
+.env
+.env.local
+.env.production
+config.local.php
+
+# Bases de datos (mantener estructura pero no datos sensibles)
+# Comentar las siguientes líneas si quieres incluir las bases de datos
+# database/*.db
+# database/*.sqlite
+# database/*.sqlite3
+
+# Archivos de cache
+cache/
+tmp/
+temp/
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de Node.js (si se usan en el futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de PHP
+vendor/
+composer.lock
+
+# Archivos de backup
+*.backup
+backup/
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos sensibles
+passwords.txt
+secrets.txt
+private_keys/

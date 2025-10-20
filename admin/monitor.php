@@ -50,14 +50,14 @@ function getContactStats() {
         $db = new SQLite3('../database/contact_form.db');
         
         // Total de mensajes
-        $totalMessages = $db->querySingle('SELECT COUNT(*) FROM contact_messages');
+        $totalMessages = $db->querySingle('SELECT COUNT(*) FROM contacts');
         
-        // Mensajes no leídos
-        $unreadMessages = $db->querySingle('SELECT COUNT(*) FROM contact_messages WHERE leido = 0');
+        // Mensajes no leídos (asumimos todos como no leídos ya que no existe el campo)
+        $unreadMessages = $totalMessages;
         
         // Mensajes de hoy
         $today = date('Y-m-d');
-        $newMessages = $db->querySingle("SELECT COUNT(*) FROM contact_messages WHERE date(fecha) = '$today'");
+        $newMessages = $db->querySingle("SELECT COUNT(*) FROM contacts WHERE date(created_at) = '$today'");
         
         return [
             'total_messages' => $totalMessages,
@@ -95,7 +95,19 @@ function getLatestUsers($limit = 5) {
 function getLatestMessages($limit = 5) {
     try {
         $db = new SQLite3('../database/contact_form.db');
-        $query = $db->query('SELECT id, nombre, email, asunto, fecha, leido FROM contact_messages ORDER BY fecha DESC LIMIT ' . $limit);
+        
+        // Primero verificamos si la tabla existe
+        $tableCheck = $db->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='contacts'");
+        if (!$tableCheck) {
+            // Si no existe la tabla, devolvemos un array vacío
+            return [];
+        }
+        
+        $query = $db->query('SELECT id, name as nombre, email, subject as asunto, created_at as fecha, 0 as leido FROM contacts ORDER BY created_at DESC LIMIT ' . $limit);
+        
+        if ($query === false) {
+            return [];
+        }
         
         $messages = [];
         while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
