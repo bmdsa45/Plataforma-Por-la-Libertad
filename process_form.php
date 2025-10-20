@@ -4,12 +4,55 @@ session_start();
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
+// Autoload de Composer para PHPMailer
+require_once __DIR__ . '/vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 // Función para sanitizar entradas
 function sanitize_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
     return $data;
+}
+
+// Función para enviar email de contacto vía SMTP (PHPMailer)
+function send_contact_email($name, $email, $subject, $message) {
+    $logFile = __DIR__ . '/logs/email_' . date('Y-m') . '.log';
+    if (!is_dir(dirname($logFile))) {
+        mkdir(dirname($logFile), 0755, true);
+    }
+
+    try {
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = getenv('SMTP_HOST') ?: 'smtp.gmail.com';
+        $mail->Port = getenv('SMTP_PORT') ? (int)getenv('SMTP_PORT') : 587;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Username = getenv('SMTP_USERNAME') ?: '';
+        $mail->Password = getenv('SMTP_PASSWORD') ?: '';
+        $fromEmail = getenv('SMTP_FROM') ?: 'sistema@ppluy.org';
+        $adminEmail = getenv('ADMIN_EMAIL') ?: 'militanciappl@gmail.com';
+
+        $mail->setFrom($fromEmail, 'PPLuy - Sitio Web');
+        $mail->addAddress($adminEmail);
+        if (!empty($email)) {
+            $mail->addReplyTo($email, $name);
+        }
+
+        $mail->Subject = 'Contacto: ' . $subject;
+        $mail->Body = "Nombre: $name\nEmail: $email\n\nMensaje:\n$message\n\nIP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+        $mail->AltBody = $mail->Body;
+
+        $mail->send();
+        file_put_contents($logFile, "[".date('Y-m-d H:i:s')."] Email de contacto enviado a $adminEmail\n", FILE_APPEND);
+        return true;
+    } catch (Exception $e) {
+        file_put_contents($logFile, "[".date('Y-m-d H:i:s')."] Error envío email: " . $e->getMessage() . "\n", FILE_APPEND);
+        return false;
+    }
 }
 
 // Verificar si es una solicitud POST
@@ -83,6 +126,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $db->prepare('INSERT INTO contacts (name, email, subject, message, ip_address) VALUES (?, ?, ?, ?, ?)');
         $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
         $stmt->execute([$name, $email, $subject, $message, $ip]);
+        
+        // Intentar enviar el email de contacto
+        $sent = send_contact_email($name, $email, $subject, $message);
+        if (!$sent) {
+            // Si falla el envío, responder igualmente éxito y registrar el error
+            error_log('Fallo al enviar email de contacto. Revise logs/email_*.log y credenciales SMTP.');
+        }
         
         // Responder con éxito
         echo json_encode(['success' => true, 'message' => '¡Gracias por tu mensaje! Te responderemos a la brevedad.']);
