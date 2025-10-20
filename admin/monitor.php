@@ -135,11 +135,12 @@ if (isset($_POST['send_database'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-UY">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración - Plataforma Por la Libertad</title>
+<meta name="robots" content="noindex,nofollow">
+<title>Panel de Administración - Plataforma Por la Libertad</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
         .admin-container {
