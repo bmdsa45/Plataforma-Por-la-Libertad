@@ -46,11 +46,8 @@ Acceder a: `http://localhost:8000/`
 ```bash
 php -S localhost:8080
 ```
-Acceder a: `http://localhost:8080/`
 
-**Panel de administración**: `http://localhost:8080/admin/login.php`
-- Usuario: `admin@ppluy.org`
-- Contraseña: `admin123`
+
 
 ## Salud y Seguridad del Sitio
 - Ubicación: portada (`index.html`). Lógica en `js/site-health.js`. Estilos en `styles.css`.
