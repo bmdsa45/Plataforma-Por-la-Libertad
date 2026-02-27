@@ -200,15 +200,56 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 10px 15px;
+    min-height: 70px;
 }
 
 .logo img {
     height: 50px;
+    width: auto;
+    display: block;
+}
+
+/* Menu Toggle Button (Mobile) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg);
 }
 
 nav ul {
     display: flex;
+    align-items: center;
 }
 
 nav ul li {
@@ -824,17 +865,48 @@ footer {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
+@media (max-width: 992px) {
+    .menu-toggle {
+        display: flex;
     }
-    
+
     nav ul {
-        margin-top: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out, padding 0.3s ease;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 999;
+        padding: 0;
     }
-    
+
+    nav ul.active {
+        max-height: 500px;
+        padding: 20px 0;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        font-size: 1.1rem;
+        display: inline-block;
+        padding: 10px 20px;
+        width: auto;
+    }
+
+    nav ul li a:after {
+        display: none;
+    }
+
     .hero .container {
         flex-direction: column;
     }
@@ -890,15 +962,6 @@ footer {
 }
 
 @media (max-width: 576px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    nav ul li {
-        margin: 10px 0;
-    }
-    
     .btn {
         display: block;
         width: 100%;

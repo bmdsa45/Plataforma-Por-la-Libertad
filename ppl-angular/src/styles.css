@@ -295,9 +295,7 @@ nav ul li a.active {
     }
 
     .mobile-logo {
-        display: block;
-        padding: 0 0 20px;
-        width: 100%;
+        display: none; /* No necesario en dropdown superior */
     }
 
     .menu-overlay {
@@ -319,47 +317,40 @@ nav ul li a.active {
     }
 
     nav ul {
-        position: fixed;
-        top: 0;
-        left: -100%; /* Inicia fuera de la pantalla por la izquierda */
-        width: 280px; /* Ancho del menú lateral */
-        height: 100vh;
+        position: absolute;
+        top: 100%; /* Justo debajo del header */
+        left: 0;
+        width: 100%;
+        height: auto;
+        max-height: 0; /* Oculto inicialmente */
         background-color: #fff;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
-        padding: 100px 30px 30px;
-        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        align-items: center;
+        padding: 0;
+        transition: max-height 0.4s ease-in-out, padding 0.3s ease;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
         z-index: 999;
-        overflow-y: auto;
+        overflow: hidden;
     }
 
     nav ul.active {
-        left: 0; /* Desliza hacia la derecha para mostrarse */
+        max-height: 500px; /* Suficiente para todos los enlaces */
+        padding: 20px 0;
     }
 
     nav ul li {
-        margin: 15px 0;
+        margin: 10px 0;
         width: 100%;
-        text-align: left;
-    }
-
-    .mobile-logo img {
-        height: 40px;
-        margin-bottom: 15px;
-    }
-
-    .mobile-logo hr {
-        border: 0;
-        border-top: 1px solid #eee;
+        text-align: center;
     }
 
     nav ul li a {
         font-size: 1.1rem;
-        display: block;
-        padding: 10px 0;
-        border-bottom: 1px solid #f0f0f0;
+        display: inline-block;
+        padding: 10px 20px;
+        width: auto;
+        border-bottom: none;
     }
 
     nav ul li a:after {
