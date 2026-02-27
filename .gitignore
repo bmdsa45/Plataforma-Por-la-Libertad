@@ -23,3 +23,10 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Archivos de PHP
+vendor/
+composer.lock
+/ppl-angular/node_modules/
+/ppl-angular/dist/
+/ppl-angular/.angular/
