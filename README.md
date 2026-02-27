@@ -1,92 +1,70 @@
-# Plataforma Por la Libertad (PPLuy)
+# Plataforma Por la Libertad (PPLuy) - Angular Version
 
-Sitio web completo del movimiento PPLuy con funcionalidades públicas y panel de administración. Incluye secciones informativas, formularios de contacto/registro, sistema de administración y monitoreo de salud del sitio.
+Sitio web moderno del movimiento PPLuy, migrado a **Angular 19** para ofrecer una experiencia de aplicación de una sola página (SPA) más rápida, interactiva y segura.
 
-## Características principales
-- **Sitio web público** con páginas informativas
-- **Panel de administración** con autenticación
-- **Sistema de contacto** con base de datos SQLite
-- **Registro de usuarios** y gestión de donantes
-- **Monitoreo de salud** del sitio en tiempo real
-- **Diseño responsive** con bloques plegables móviles
-- **Backup automático** de bases de datos por email
+## 🚀 Nuevas Características (Angular)
+- **Single Page Application (SPA)**: Navegación instantánea entre secciones sin recarga de página.
+- **Componentización**: Arquitectura modular con componentes reutilizables para Header, Footer y Páginas.
+- **Formularios Reactivos**: Validación avanzada en tiempo real para Contacto y Registro.
+- **Estado Dinámico**: Gestión de menús móviles y monitores de salud integrados en el ciclo de vida de Angular.
+- **Seguridad Mejorada**: Sanitización automática de contenido y protección contra ataques comunes (XSS/CSRF) integrada en el framework.
 
-## Estructura del proyecto
+## 📁 Estructura del Proyecto Angular
 ```
-PPLuy/
-├── index.html                 # Portada principal
-├── styles.css                 # Estilos globales
-├── admin/                     # Panel de administración
-│   ├── login.php             # Login de administrador
-│   └── monitor.php           # Dashboard de administración
-├── database/                  # Bases de datos SQLite
-│   ├── contact_form.db       # Mensajes de contacto
-│   ├── user_registry.db      # Registro de usuarios
-│   └── create_user_registry.php
-├── js/                       # Scripts JavaScript
-│   ├── collapsible.js        # Bloques plegables móviles
-│   ├── site-health.js        # Monitoreo de salud
-│   ├── form-validation.js    # Validación de formularios
-│   └── registro-validation.js
-├── process_form.php          # Procesamiento de contacto
-├── process_registro.php      # Procesamiento de registro
-├── send_database_email.php   # Backup por email
-└── [páginas públicas].html   # Contenido informativo
+ppl-angular/
+├── src/
+│   ├── app/
+│   │   ├── components/       # Componentes globales (Header, Footer)
+│   │   ├── pages/            # Páginas de la aplicación (Home, About, etc.)
+│   │   ├── app.routes.ts     # Configuración de enrutamiento
+│   │   └── app.component.ts  # Componente raíz
+│   ├── assets/               # Scripts legacy y recursos estáticos
+│   └── styles.css            # Estilos globales migrados
+├── public/                   # Imágenes, SVGs y recursos públicos
+└── angular.json              # Configuración del espacio de trabajo
 ```
 
-## Desarrollo local
+## 🛠️ Desarrollo Local
 
-### Servidor estático (para contenido HTML/CSS/JS)
-```bash
-python -m http.server 8000
-```
-Acceder a: `http://localhost:8000/`
+### Requisitos previos
+- Node.js (v18.13.0 o superior)
+- Angular CLI (`npm install -g @angular/cli`)
 
-### Servidor PHP (para funcionalidades backend)
-```bash
-php -S localhost:8080
-```
+### Instalación y Ejecución
+1. Entrar en la carpeta del proyecto:
+   ```bash
+   cd ppl-angular
+   ```
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+3. Iniciar el servidor de desarrollo:
+   ```bash
+   npx ng serve
+   ```
+4. Abrir en el navegador: `http://localhost:4200/`
 
+## 📊 Monitor de Salud y Seguridad
+La funcionalidad de monitoreo ahora está integrada en el componente `HealthMonitor`, permitiendo:
+- Actualización de métricas de rendimiento y seguridad en tiempo real.
+- Verificación dinámica de estados de conexión y latencia.
+- Visualización de medidas de seguridad implementadas (CSRF, XSS, HTTPS).
 
+## 🌐 Despliegue en GitHub Pages
+Para desplegar la versión de Angular en GitHub Pages:
+1. Instalar el paquete de despliegue:
+   ```bash
+   npm install -g angular-cli-ghpages
+   ```
+2. Construir el proyecto:
+   ```bash
+   npx ng build --base-href /Plataforma-Por-la-Libertad/
+   ```
+3. Desplegar:
+   ```bash
+   npx ngh --dir=dist/ppl-angular/browser
+   ```
 
-## Salud y Seguridad del Sitio
-- Ubicación: portada (`index.html`). Lógica en `js/site-health.js`. Estilos en `styles.css`.
-- Indicadores:
-  - **HTTPS**: Detecta si la conexión es segura (en local suele salir "No seguro").
-  - **Latencia**: Mide tiempo de respuesta con `fetch` a `ppl.svg`.
-  - **Disponibilidad**: Marca si el recurso responde correctamente.
-  - **Escaneo de seguridad**: Puntaje según cabeceras/etiquetas clave presentes:
-    - `Strict-Transport-Security` (HSTS)
-    - `X-Content-Type-Options` (nosniff)
-    - `Content-Security-Policy` (CSP) como cabecera o meta
-    - `Referrer-Policy` como cabecera o meta
-- Actualización: cada 30 segundos. Colores: verde (ok), amarillo (advertencia), rojo (crítico). Se muestra también "Última revisión" y un **estado general**.
-
-## Despliegue en GitHub Pages
-1. Subir a GitHub (rama `main`).
-2. En el repo: `Settings` → `Pages` → "Build and deployment".
-   - Source: `Deploy from a branch`
-   - Branch: `main`, Folder: `/root`
-3. La URL pública será similar a: `https://<usuario>.github.io/Plataforma-Por-la-Libertad/`
-4. Nota: En Pages, **HTTPS** aparecerá "Activo". Algunas cabeceras pueden no estar visibles o gestionadas por GitHub (es normal). 
-
-### Dominio propio (opcional)
-- Configurar DNS (CNAME → `<usuario>.github.io`).
-- En `Settings` → `Pages`: añadir el dominio.
-- GitHub emitirá el certificado y el indicador HTTPS seguirá activo.
-
-## Mantenimiento
-- Actualizar contenido y hacer commit/push:
-  - `git add .`
-  - `git commit -m "Actualización de contenido"`
-  - `git push`
-- Revisar la portada para confirmar que los indicadores se muestran y actualizan.
-
-## Notas de seguridad
-- Para cabeceras como CSP/HSTS/nosniff/Referrer-Policy, en GitHub Pages la gestión de cabeceras la hace la plataforma. Las etiquetas `meta` ayudan en algunos casos, pero las cabeceras HTTP ofrecen mayor eficacia.
-
-## Redes sociales
-- X: https://x.com/PPLuy_
-- Ubicación: footer de todas las páginas y sección social-media de `registro.html`.
-- Icono: Font Awesome `fa-x-twitter` ya incluido en los HTML. Color configurado en `styles.css`.
-- Para añadir otras redes: editar los bloques `.social-links` en los HTML y el estilo correspondiente en `styles.css`.
+---
+*Nota: La estructura original en HTML/PHP se mantiene en la raíz para referencia, pero el desarrollo principal se ha movido a la carpeta `ppl-angular`.*
