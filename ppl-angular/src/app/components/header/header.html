@@ -1,0 +1,25 @@
+<header>
+    <div class="container">
+        <div class="logo">
+            <a routerLink="/">
+                <img src="ppluy.svg" alt="Logo Plataforma Por la Libertad">
+            </a>
+        </div>
+        <nav>
+            <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul [class.active]="isMenuOpen">
+                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+                <li><a routerLink="/quienes-somos" routerLinkActive="active">Quiénes Somos</a></li>
+                <li><a routerLink="/propuestas" routerLinkActive="active">Propuestas</a></li>
+                <li><a routerLink="/noticias" routerLinkActive="active">Noticias</a></li>
+                <li><a routerLink="/documentos" routerLinkActive="active">Documentos</a></li>
+                <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
+                <li><a routerLink="/registro" routerLinkActive="active" class="registro-btn">Registro</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

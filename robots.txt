@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: http://localhost:8080/sitemap.xml
+Sitemap: https://bmdsa45.github.io/Plataforma-Por-la-Libertad/sitemap.xml

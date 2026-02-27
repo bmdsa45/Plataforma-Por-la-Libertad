@@ -1,0 +1,56 @@
+<section class="container">
+    <h1>Monitor de Salud del Sitio</h1>
+    <p>Panel de control en tiempo real para monitorear el estado y rendimiento del sitio web.</p>
+    
+    <div class="monitor-controls">
+        <button (click)="refreshData()" class="refresh-button">Actualizar datos</button>
+        <span class="last-update">Última actualización: {{lastUpdate | date:'HH:mm:ss'}}</span>
+    </div>
+    
+    <div class="dashboard">
+        <div class="metric-card" *ngFor="let metric of metrics">
+            <div class="metric-header">
+                <span class="metric-title">{{metric.title}}</span>
+                <span class="metric-status" [ngClass]="'status-' + metric.status">{{metric.statusText}}</span>
+            </div>
+            <div class="metric-value">{{metric.value}}</div>
+            <div class="metric-description">{{metric.description}}</div>
+            <div class="progress-bar">
+                <div class="progress-value" [style.width.%]="metric.progress" [style.background-color]="metric.status === 'good' ? '#28a745' : metric.status === 'warning' ? '#ffc107' : '#dc3545'"></div>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Detalles de seguridad implementada</h2>
+    <table class="security-table">
+        <thead>
+            <tr>
+                <th>Medida de seguridad</th>
+                <th>Estado</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Protección CSRF</td>
+                <td><span class="check-icon">✓</span> Implementado</td>
+                <td>Tokens CSRF generados para todos los formularios (vía Angular)</td>
+            </tr>
+            <tr>
+                <td>Protección XSS</td>
+                <td><span class="check-icon">✓</span> Implementado</td>
+                <td>Sanitización automática de Angular implementada</td>
+            </tr>
+            <tr>
+                <td>Encriptación de datos</td>
+                <td><span class="check-icon">✓</span> Implementado</td>
+                <td>Manejo seguro de datos sensibles</td>
+            </tr>
+            <tr>
+                <td>Cabeceras de seguridad</td>
+                <td><span class="check-icon">✓</span> Implementado</td>
+                <td>Configuración de seguridad de servidor recomendada</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

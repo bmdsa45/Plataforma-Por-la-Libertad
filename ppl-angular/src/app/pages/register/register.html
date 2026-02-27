@@ -1,0 +1,111 @@
+<section class="page-header">
+    <div class="container">
+        <h1>Registro de Usuario</h1>
+        <p>Únete a nuestra plataforma y apoya el movimiento por la libertad</p>
+    </div>
+</section>
+
+<section class="registro">
+    <div class="container">
+        <div class="registro-intro">
+            <h2>Forma parte de nuestra comunidad</h2>
+            <p>Al registrarte podrás participar en nuestras actividades, recibir información actualizada y contribuir al desarrollo de nuestras propuestas.</p>
+        </div>
+
+        <div *ngIf="formSubmitted" class="form-success">
+            <p>¡Registro exitoso! Gracias por unirte a la Plataforma Por la Libertad.</p>
+        </div>
+
+        <div class="registro-form-container" *ngIf="!formSubmitted">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registro-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" formControlName="nombre" [class.invalid]="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
+                    <span class="error-message" *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">Mínimo 3 caracteres</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico *</label>
+                    <input type="email" id="email" formControlName="email" [class.invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                    <span class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">Ingresa un correo válido</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" formControlName="telefono" [class.invalid]="registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched">
+                    <span class="error-message" *ngIf="registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched">Formato de teléfono inválido</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña *</label>
+                    <input type="password" id="password" formControlName="password" [class.invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                    <span class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">Mínimo 8 caracteres, incluye Mayúscula, minúscula y número</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirmar contraseña *</label>
+                    <input type="password" id="confirm_password" formControlName="confirm_password" [class.invalid]="(registerForm.get('confirm_password')?.invalid || registerForm.hasError('mismatch')) && registerForm.get('confirm_password')?.touched">
+                    <span class="error-message" *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirm_password')?.touched">Las contraseñas no coinciden</span>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="donante" formControlName="donante">
+                    <label for="donante">Quiero ser donante/aportante</label>
+                </div>
+                
+                <div id="seccion-donante" class="donante-section" *ngIf="registerForm.get('donante')?.value">
+                    <h3>Información para donantes</h3>
+                    <p>Como donante, podrás contribuir económicamente al desarrollo de nuestras actividades.</p>
+                    
+                    <div class="form-group">
+                        <label for="tipo_donacion">Tipo de aporte</label>
+                        <select id="tipo_donacion" formControlName="tipo_donacion">
+                            <option value="mensual">Mensual</option>
+                            <option value="unico">Único</option>
+                            <option value="anual">Anual</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="monto">Monto (UYU)</label>
+                        <input type="number" id="monto" formControlName="monto">
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h4>Método de pago</h4>
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <input type="radio" id="tarjeta" formControlName="metodo_pago" value="tarjeta">
+                                <label for="tarjeta">Tarjeta de crédito/débito</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="transferencia" formControlName="metodo_pago" value="transferencia">
+                                <label for="transferencia">Transferencia bancaria</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terminos" formControlName="terminos">
+                    <label for="terminos">Acepto los <a routerLink="/terminos-condiciones">términos y condiciones</a> *</label>
+                    <span class="error-message" *ngIf="registerForm.get('terminos')?.invalid && registerForm.get('terminos')?.touched">Debes aceptar los términos</span>
+                </div>
+                
+                <div class="form-group captcha-container">
+                    <label for="captcha">Verificación de seguridad *</label>
+                    <div class="captcha-box">
+                        <span id="captcha-text">{{captchaValue}}</span>
+                    </div>
+                    <input type="text" id="captcha" formControlName="captcha" [class.invalid]="registerForm.get('captcha')?.invalid && registerForm.get('captcha')?.touched">
+                    <span class="error-message" *ngIf="registerForm.get('captcha')?.errors?.['incorrect'] && registerForm.get('captcha')?.touched">Código incorrecto</span>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarme</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
