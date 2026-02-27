@@ -6,19 +6,24 @@
             </a>
         </div>
         <nav>
+            <div class="menu-overlay" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
             <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <ul [class.active]="isMenuOpen">
-                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-                <li><a routerLink="/quienes-somos" routerLinkActive="active">Quiénes Somos</a></li>
-                <li><a routerLink="/propuestas" routerLinkActive="active">Propuestas</a></li>
-                <li><a routerLink="/noticias" routerLinkActive="active">Noticias</a></li>
-                <li><a routerLink="/documentos" routerLinkActive="active">Documentos</a></li>
-                <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
-                <li><a routerLink="/registro" routerLinkActive="active" class="registro-btn">Registro</a></li>
+                <li class="mobile-logo">
+                    <img src="ppluy.svg" alt="PPLuy">
+                    <hr>
+                </li>
+                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Inicio</a></li>
+                <li><a routerLink="/quienes-somos" routerLinkActive="active" (click)="closeMenu()">Quiénes Somos</a></li>
+                <li><a routerLink="/propuestas" routerLinkActive="active" (click)="closeMenu()">Propuestas</a></li>
+                <li><a routerLink="/noticias" routerLinkActive="active" (click)="closeMenu()">Noticias</a></li>
+                <li><a routerLink="/documentos" routerLinkActive="active" (click)="closeMenu()">Documentos</a></li>
+                <li><a routerLink="/contacto" routerLinkActive="active" (click)="closeMenu()">Contacto</a></li>
+                <li><a routerLink="/registro" routerLinkActive="active" class="registro-btn" (click)="closeMenu()">Registro</a></li>
             </ul>
         </nav>
     </div>
