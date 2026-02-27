@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+dist/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.angular/
+.vscode/
+.idea/
+
+# Angular specific
+/ppl-angular/node_modules/
+/ppl-angular/dist/
+/ppl-angular/.angular/
+/ppl-angular/src/assets/js/
+/ppl-angular/public/img/
+/ppl-angular/public/*.svg
+/ppl-angular/public/*.jpg
+/ppl-angular/public/*.png
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de PHP
+vendor/
+composer.lock
+/ppl-angular/node_modules/
+/ppl-angular/dist/
+/ppl-angular/.angular/
